@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPages/site.master" AutoEventWireup="true" CodeBehind="Dashboard.master.cs" Inherits="POS_aspdotnet.MasterPages.Dashboard" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container-fluid">
+        <div class="row" style="min-height: 79vh">
+            <!-- Sidebar (col-3 for 25% width) -->
+            <div class="col-3 sidebar bg-success p-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white d-flex align-items-center" href="/Dashboard/Employees/employees.aspx">
+                            <i class="fas fa-user-tie text-warning me-2"></i> Employees
+                        </a>
+                    </li>
+                    <hr />
+                    <li class="nav-item">
+                        <a class="nav-link text-white d-flex align-items-center" href="/Dashboard/Stocks/stocks.aspx">
+                            <i class="fas fa-box text-primary me-2"></i> Stocks
+                        </a>
+                    </li>
+                    <hr />
+                    <li class="nav-item">
+                        <a class="nav-link text-white d-flex align-items-center" href="/Dashboard/Invoices/invoices.aspx">
+                            <i class="fas fa-file-invoice-dollar text-info me-2"></i> Invoices
+                        </a>
+                    </li>
+                    <hr />
+                    <li class="nav-item">
+                        <a class="nav-link text-white d-flex align-items-center" href="/Dashboard/Categories/categories.aspx">
+                            <i class="fas fa-tags text-danger me-2"></i> Categories
+                        </a>
+                    </li>
+                    <hr />
+                </ul>
+            </div>
+
+            <!-- Main Content (col-9 for 75% width) -->
+            <div class="col-9 main-content p-4 overflow-auto" style="max-height: 80vh;">
+                <asp:ContentPlaceHolder ID="DashboardContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .nav-link {
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: background 0.3s ease-in-out;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /*.main-content {
+            margin-left: 250px;*/ /* Adjust to the sidebar width */
+        /*}*/
+    </style>
+</asp:Content>
