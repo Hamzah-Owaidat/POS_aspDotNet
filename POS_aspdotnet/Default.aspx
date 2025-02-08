@@ -1,44 +1,35 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="POS_aspdotnet._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
-
+    <div class="container my-3">
         <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
-        </div>
-    </main>
+            <!-- Invoice List Box -->
+            <div class="col-4 bg-success p-3">
+                <h4 class="text-white">Invoice List</h4>
+                <asp:ListBox ID="invoiceLb" runat="server" CssClass="form-control w-full" Height="300px"></asp:ListBox>
+                <br />
+                <p>Total: <asp:Label ID="lblTotalInvoiceAmount" runat="server" CssClass="text-white"></asp:Label></p>
+                <asp:Button ID="btnCreate" runat="server" Text="Create Invoive" CssClass="btn btn-danger mt-2" OnClick="btnCreate_Click" />
+                <asp:Button ID="btnClear" runat="server" Text="Clear List" CssClass="btn btn-danger mt-2" OnClick="btnClear_Click" />
+            </div>
 
+            <!-- Stocks List -->
+            <div class="col-8 main-content overflow-auto ps-5" style="max-height: 80vh;">
+                <div class="d-flex flex-wrap gap-3">
+                    <asp:Repeater ID="rptStocks" runat="server" OnItemCommand="rptStocks_ItemCommand">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnAddItem" runat="server" CommandName="AddToInvoice" CommandArgument='<%# Eval("Id") %>' CssClass="text-decoration-none">
+                                <div class="card p-2 text-center text-dark" style="width: 200px; cursor: pointer;">
+                                    <img src='<%# ResolveUrl("~/Images/") + Eval("image") %>' alt="Stock Image" class="img-thumbnail mx-auto" style="width: 100px; height: 100px;" />
+                                    <h5><%# Eval("item_name") %></h5>
+                                    <p>Quantity: <%# Eval("quantity") %></p>
+                                    <p>Price: <%# (Convert.ToDecimal(Eval("price")) * 1.1M).ToString("C") %> $</p>
+                                </div>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

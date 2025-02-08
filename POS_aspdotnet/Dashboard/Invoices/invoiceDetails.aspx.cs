@@ -73,8 +73,11 @@ namespace POS_aspdotnet.Dashboard.Invoices
                     decimal totalAmount = 0;
                     foreach (DataRow row in dt.Rows)
                     {
-                        totalAmount += Convert.ToDecimal(row["Price"]);
+                        decimal price = Convert.ToDecimal(row["Price"]);
+                        int quantity = Convert.ToInt32(row["Quantity"]);
+                        totalAmount += price * quantity; // Multiply price by quantity
                     }
+
                     lblTotalAmount.Text = totalAmount.ToString("C");
                 }
             }
